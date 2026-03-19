@@ -10,17 +10,17 @@ import { Note as NoteModel } from '../models/notes/base';
 @Entity()
 export class Note implements NoteModel {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column()
-  title: string;
+  title!: string;
 
   @Column()
-  content: string;
+  content!: string;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt!: Date;
 
   @DeleteDateColumn()
-  deletedAt: Date;
+  deletedAt!: Date;
 }

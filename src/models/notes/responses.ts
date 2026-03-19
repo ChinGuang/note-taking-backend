@@ -1,6 +1,9 @@
-import { Note } from './base';
+import { z } from 'zod';
+import { NoteZod } from './base';
 
-export interface GetNotesResponse {
-  message: string;
-  notes: Note[];
-}
+export const GetNotesResponseZod = z.object({
+  message: z.string(),
+  notes: z.array(NoteZod.extend({ id: z.number().int() })),
+});
+
+export type GetNotesResponse = z.infer<typeof GetNotesResponseZod>;

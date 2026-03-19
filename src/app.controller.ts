@@ -5,7 +5,10 @@ import {
   Query,
 } from '@nestjs/common';
 import { AppService } from './app.service';
-import { GetNotesResponse } from './models/notes/responses';
+import {
+  GetNotesResponse,
+  GetNotesResponseZod,
+} from './models/notes/responses';
 
 @Controller()
 export class AppController {
@@ -22,7 +25,10 @@ export class AppController {
   ): Promise<GetNotesResponse> {
     try {
       const notes = await this.appService.getNotes(query);
-      return { message: 'Notes retrieved successfully', notes };
+      return GetNotesResponseZod.parse({
+        message: 'Notes retrieved successfully',
+        notes,
+      });
     } catch (error) {
       console.error(error);
       throw new InternalServerErrorException('Notes retrieval failed');
