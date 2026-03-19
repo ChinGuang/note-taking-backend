@@ -20,13 +20,19 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "docker-up": "docker compose -p note-taking-backend --env-file .env -f docker/docker-compose.yml up -d",
     "docker-down": "docker compose -p note-taking-backend --env-file .env -f docker/docker-compose.yml down",
-    "docker-reset": "docker compose -p note-taking-backend --env-file .env -f docker/docker-compose.yml down -v"
+    "docker-reset": "docker compose -p note-taking-backend --env-file .env -f docker/docker-compose.yml down -v",
+    "typeorm": "typeorm-ts-node-commonjs",
+    "migration:generate": "npm run typeorm migration:generate -- ./src/migrations/migrate -d ./src/providers/database/data-source.ts",
+    "migration:run": "npm run typeorm migration:run -- -d ./src/providers/database/data-source.ts",
+    "migration:revert": "npm run typeorm migration:revert -- -d ./src/providers/database/data-source.ts"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.3",
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
+    "@nestjs/typeorm": "^11.0.0",
+    "dotenv": "^17.3.1",
     "pg": "^8.20.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",

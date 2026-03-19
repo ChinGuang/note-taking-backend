@@ -5,9 +5,10 @@ import {
   Entity,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Note as NoteModel } from '../models/notes/base';
 
 @Entity()
-export class Note {
+export class Note implements NoteModel {
   @PrimaryGeneratedColumn()
   id: number;
 

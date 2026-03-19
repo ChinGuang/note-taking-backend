@@ -1,5 +1,11 @@
-import { Controller, Get } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  InternalServerErrorException,
+  Query,
+} from '@nestjs/common';
 import { AppService } from './app.service';
+import { GetNotesResponse } from './models/notes/responses';
 
 @Controller()
 export class AppController {
@@ -8,5 +14,18 @@ export class AppController {
   @Get()
   getHello(): string {
     return this.appService.getHello();
+  }
+
+  @Get('notes')
+  async getNotes(
+    @Query() query: { limit?: number; offset?: number },
+  ): Promise<GetNotesResponse> {
+    try {
+      const notes = await this.appService.getNotes(query);
+      return { message: 'Notes retrieved successfully', notes };
+    } catch (error) {
+      console.error(error);
+      throw new InternalServerErrorException('Notes retrieval failed');
+    }
   }
 }

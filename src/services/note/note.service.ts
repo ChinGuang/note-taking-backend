@@ -1,12 +1,20 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Note } from '../../entity/note.entity';
-import { NOTE_REPOSITORY } from '../../utils/constants';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class NoteService {
   constructor(
-    @Inject(NOTE_REPOSITORY)
+    @InjectRepository(Note)
     private readonly noteRepository: Repository<Note>,
   ) {}
+
+  async read(payload: { limit?: number; offset?: number }) {
+    const { limit, offset } = payload;
+    return this.noteRepository.find({
+      take: limit ?? 20,
+      skip: offset ?? 0,
+    });
+  }
 }
