@@ -12,4 +12,8 @@ export class AppService {
   getNotes(payload: { limit?: number; offset?: number }): Promise<Note[]> {
     return this.noteService.read(payload);
   }
+
+  createNote(note: Note): Promise<Note> {
+    return this.noteService.createNote(note);
+  }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Note } from '../../entity/note.entity';
+import { Note as NoteModel } from '../../models/notes/base';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
@@ -10,11 +11,15 @@ export class NoteService {
     private readonly noteRepository: Repository<Note>,
   ) {}
 
-  async read(payload: { limit?: number; offset?: number }) {
+  async read(payload: { limit?: number; offset?: number }): Promise<Note[]> {
     const { limit, offset } = payload;
     return this.noteRepository.find({
       take: limit ?? 20,
       skip: offset ?? 0,
     });
+  }
+
+  async createNote(note: NoteModel): Promise<Note> {
+    return this.noteRepository.save(note);
   }
 }

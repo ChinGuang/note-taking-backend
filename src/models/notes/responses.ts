@@ -7,3 +7,10 @@ export const GetNotesResponseZod = z.object({
 });
 
 export type GetNotesResponse = z.infer<typeof GetNotesResponseZod>;
+
+export const CreateNoteResponseZod = z.object({
+  message: z.string(),
+  note: NoteZod.extend({ id: z.number().int() }).optional(),
+});
+
+export type CreateNoteResponse = z.infer<typeof CreateNoteResponseZod>;

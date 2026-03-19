@@ -1,14 +1,22 @@
 import {
+  Body,
   Controller,
   Get,
   InternalServerErrorException,
+  Post,
   Query,
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import {
+  CreateNoteResponse,
+  CreateNoteResponseZod,
   GetNotesResponse,
   GetNotesResponseZod,
 } from './models/notes/responses';
+import {
+  CreateNoteRequest,
+  CreateNoteRequestZod,
+} from './models/notes/requests';
 
 @Controller()
 export class AppController {
@@ -32,6 +40,23 @@ export class AppController {
     } catch (error) {
       console.error(error);
       throw new InternalServerErrorException('Notes retrieval failed');
+    }
+  }
+
+  @Post('notes')
+  async createNotes(
+    @Body() body: CreateNoteRequest,
+  ): Promise<CreateNoteResponse> {
+    try {
+      const sanitizedBody = CreateNoteRequestZod.parse(body);
+      const note = await this.appService.createNote(sanitizedBody);
+      return CreateNoteResponseZod.parse({
+        message: 'Note created successfully',
+        note,
+      });
+    } catch (error) {
+      console.error(error);
+      throw new InternalServerErrorException('Note creation failed');
     }
   }
 }
