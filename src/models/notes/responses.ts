@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { NoteZod } from './base';
+import { NoteZod } from './base.js';
 
 export const GetNotesResponseZod = z.object({
   message: z.string(),

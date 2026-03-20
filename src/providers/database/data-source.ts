@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm';
-import { Note } from '../../entity/note.entity';
+import { Note } from '../../entity/note.entity.js';
 import * as dotenv from 'dotenv';
 
 dotenv.config();

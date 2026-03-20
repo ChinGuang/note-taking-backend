@@ -5,7 +5,7 @@ import {
   Entity,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Note as NoteModel } from '../models/notes/base';
+import { Note as NoteModel } from '../models/notes/base.js';
 
 @Entity()
 export class Note implements NoteModel {

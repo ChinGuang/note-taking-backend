@@ -6,17 +6,17 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { AppService } from './app.service';
+import { AppService } from './app.service.js';
 import {
   CreateNoteResponse,
   CreateNoteResponseZod,
   GetNotesResponse,
   GetNotesResponseZod,
-} from './models/notes/responses';
+} from './models/notes/responses.js';
 import {
   CreateNoteRequest,
   CreateNoteRequestZod,
-} from './models/notes/requests';
+} from './models/notes/requests.js';
 
 @Controller()
 export class AppController {

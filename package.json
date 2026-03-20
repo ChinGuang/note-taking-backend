@@ -1,5 +1,6 @@
 {
   "name": "note-taking-backend",
+  "type": "module",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -21,7 +22,7 @@
     "docker-up": "docker compose -p note-taking-backend --env-file .env -f docker/docker-compose.yml up -d",
     "docker-down": "docker compose -p note-taking-backend --env-file .env -f docker/docker-compose.yml down",
     "docker-reset": "docker compose -p note-taking-backend --env-file .env -f docker/docker-compose.yml down -v",
-    "typeorm": "typeorm-ts-node-commonjs",
+    "typeorm": "NODE_OPTIONS='--loader ts-node/esm --no-warnings' typeorm-ts-node-commonjs",
     "migration:generate": "npm run typeorm migration:generate -- ./src/migrations/migrate -d ./src/providers/database/data-source.ts",
     "migration:run": "npm run typeorm migration:run -- -d ./src/providers/database/data-source.ts",
     "migration:revert": "npm run typeorm migration:revert -- -d ./src/providers/database/data-source.ts"
@@ -33,6 +34,7 @@
     "@nestjs/platform-express": "^11.0.1",
     "@nestjs/typeorm": "^11.0.0",
     "dotenv": "^17.3.1",
+    "harper.js": "^1.12.0",
     "pg": "^8.20.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
@@ -65,20 +67,19 @@
     "typescript-eslint": "^8.20.0"
   },
   "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
+    "extensionsToTreatAsEsm": [
+      ".ts"
     ],
-    "rootDir": "src",
-    "testRegex": ".*\\.spec\\.ts$",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
+    "moduleNameMapper": {
+      "^(\\.{1,2}/.*)\\.js$": "$1"
     },
-    "collectCoverageFrom": [
-      "**/*.(t|j)s"
-    ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "transform": {
+      "^.+\\.(t|j)s$": [
+        "ts-jest",
+        {
+          "useESM": true
+        }
+      ]
+    }
   }
 }
