@@ -10,6 +10,12 @@
       "code_actions_on_format": {
         "source.fixAll.eslint": true,
       },
+      "language_servers": [
+        "!tailwindcss-language-server",
+        "eslint",
+        "vtsls",
+        "package-version-server",
+      ],
     },
     "TypeScript": {
       "formatter": "prettier",
@@ -17,6 +23,12 @@
       "code_actions_on_format": {
         "source.fixAll.eslint": true,
       },
+      "language_servers": [
+        "!tailwindcss-language-server",
+        "eslint",
+        "vtsls",
+        "package-version-server",
+      ],
     },
     "TSX": {
       "formatter": "prettier",
