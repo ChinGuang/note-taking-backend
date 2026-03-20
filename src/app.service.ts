@@ -6,9 +6,6 @@ import { marked } from 'marked';
 @Injectable()
 export class AppService {
   constructor(private readonly noteService: NoteService) {}
-  getHello(): string {
-    return 'Hello World!';
-  }
 
   async getRenderedNote(id: number): Promise<string> {
     const note = await this.noteService.readById(id);
