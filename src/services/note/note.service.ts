@@ -19,6 +19,10 @@ export class NoteService {
     });
   }
 
+  async readById(id: number): Promise<Note | null> {
+    return this.noteRepository.findOne({ where: { id } });
+  }
+
   async createNote(note: NoteModel): Promise<Note> {
     return this.noteRepository.save(note);
   }

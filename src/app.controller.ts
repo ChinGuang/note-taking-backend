@@ -2,7 +2,9 @@ import {
   Body,
   Controller,
   Get,
+  Header,
   InternalServerErrorException,
+  Param,
   Post,
   Query,
 } from '@nestjs/common';
@@ -41,6 +43,12 @@ export class AppController {
       console.error(error);
       throw new InternalServerErrorException('Notes retrieval failed');
     }
+  }
+
+  @Get('notes/:id/rendered')
+  @Header('Content-Type', 'text/html')
+  async getRenderedNote(@Param('id') id: number): Promise<string> {
+    return await this.appService.getRenderedNote(id);
   }
 
   @Post('notes')
