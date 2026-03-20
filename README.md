@@ -20,3 +20,4 @@ You have to implement the following features:
 Feel free to use any programming language and framework of your choice. Use the package manager of the chosen language to install the required libraries for parsing and rendering markdown files.
 
 Topic URL: https://roadmap.sh/projects/markdown-note-taking-app
+Vote for me: https://roadmap.sh/projects/markdown-note-taking-app/solutions?u=68fdcf4832ad652bc8adb7e4
