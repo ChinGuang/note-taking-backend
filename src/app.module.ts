@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { NoteModule } from './services/note/note.module.js';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Note } from './entity/note.entity.js';
+import { GrammarModule } from './services/grammar/grammar.module.js';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { Note } from './entity/note.entity.js';
       migrationsRun: true,
     }),
     NoteModule,
+    GrammarModule,
   ],
   controllers: [AppController],
   providers: [AppService],
